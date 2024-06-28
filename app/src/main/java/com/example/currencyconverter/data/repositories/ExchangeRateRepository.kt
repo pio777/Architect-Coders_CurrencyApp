@@ -5,11 +5,10 @@ import com.example.currencyconverter.data.mappers.ExchangeHistoryMapper
 import com.example.currencyconverter.data.mappers.ExchangeRateMapper
 import com.example.currencyconverter.domain.ExchangeHistory
 import com.example.currencyconverter.domain.ExchangeRate
-import com.example.currencyconverter.domain.ExchangeRateApi
 
 class ExchangeRateRepository(private val exchangeRateMapper: ExchangeRateMapper, private val exchangeHistoryMapper: ExchangeHistoryMapper) {
 
-    suspend fun getPairConversion(base: String, target: String, amount: Float): ExchangeRateApi {
+    suspend fun getPairConversion(base: String, target: String, amount: Float): ExchangeRate {
         val result = ExchangeRateClient
             .retrofitInstance
             .getPairConversion(base, target, amount)
