@@ -1,7 +1,7 @@
 package com.example.currencyconverter.data.mappers
 
 import com.example.currencyconverter.data.ExchangeRateResult
-import com.example.currencyconverter.domain.ExchangeRateApi
+import com.example.currencyconverter.domain.ExchangeRate
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -10,7 +10,7 @@ import java.util.Locale
 object ExchangeRateMapper {
     private val dateFormat = SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z", Locale.ENGLISH)
 
-    fun toDomain(response: ExchangeRateResult): ExchangeRateApi {
+    fun toDomain(response: ExchangeRateResult): ExchangeRate {
         val lastUpdateDate = response.timeLastUpdateUtc?.let {
             try {
                 dateFormat.parse(it)
@@ -26,7 +26,7 @@ object ExchangeRateMapper {
             }
         }
 
-        return ExchangeRateApi(
+        return ExchangeRate(
             result = response.result,
             documentation = response.documentation,
             termsOfUse = response.termsOfUse,

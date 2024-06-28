@@ -21,4 +21,5 @@
     <string name="message">Message: %1$s</string>
     <string name="error_icon_description">Error Icon</string>
     <string name="close">Close</string>
+    <string name="graph_label_value">%.2f</string>
 </resources>

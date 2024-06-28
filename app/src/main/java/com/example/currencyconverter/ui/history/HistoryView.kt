@@ -3,6 +3,8 @@ package com.example.currencyconverter.ui.history
 import android.app.DatePickerDialog
 import android.content.Context
 import android.graphics.Typeface
+import android.text.Layout
+import android.text.TextUtils
 import android.util.Log
 import android.widget.DatePicker
 import androidx.compose.foundation.Canvas
@@ -67,10 +69,11 @@ import com.patrykandpatrick.vico.core.chart.line.LineChart.LineSpec
 import com.patrykandpatrick.vico.core.chart.scale.AutoScaleUp
 import com.patrykandpatrick.vico.core.component.shape.ShapeComponent
 import com.patrykandpatrick.vico.core.component.shape.Shapes
+import com.patrykandpatrick.vico.core.component.text.TextComponent
 import com.patrykandpatrick.vico.core.component.text.textComponent
 import com.patrykandpatrick.vico.core.entry.entryModelOf
+import com.patrykandpatrick.vico.core.legend.HorizontalLegend
 import com.patrykandpatrick.vico.core.legend.LegendItem
-import com.patrykandpatrick.vico.core.legend.VerticalLegend
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -306,6 +309,7 @@ fun ExchangeRateChart(
     val dateFormat = SimpleDateFormat("dd/MM", Locale.getDefault())
     val minValue = exchangeRates.minOfOrNull { it.second } ?: 0f
     val maxValue = exchangeRates.maxOfOrNull { it.second } ?: 0f
+    val context = LocalContext.current
 
     Box(
         modifier = Modifier
@@ -361,7 +365,10 @@ fun ExchangeRateChart(
                     )
 
                     // Calculate and display the label value
-                    val labelValue = String.format("%.2f", maxValue - (i * (maxValue - minValue) / GRAPH_LINES_NUMBER))
+                    val labelValue = String.format(
+                        Locale.getDefault(),
+                        context.getString(R.string.graph_label_value), maxValue - (i * (maxValue - minValue) / GRAPH_LINES_NUMBER)
+                    )
                     drawContext.canvas.nativeCanvas.drawText(
                         labelValue,
                         0f,
@@ -484,7 +491,7 @@ fun ComplexLineChart() {
             chart = lineChart(),
             model = chartEntryModel,
             startAxis = rememberStartAxis(),
-            bottomAxis = rememberBottomAxis(),
+            bottomAxis = rememberBottomAxis()
         )
     }
 }
@@ -532,22 +539,60 @@ fun CurrencyLineChart(currencyData: List<Pair<Date, Float>>) {
             modifier = Modifier
                 .fillMaxWidth()
                 .height(250.dp),
-            startAxis = rememberStartAxis(
-                label = axisLabelComponent()
-            ),
-            bottomAxis = rememberBottomAxis(
-                label = axisLabelComponent()
-            ),
+            startAxis = rememberStartAxis(label = getCustomAxisLabelComponent()),
+            bottomAxis = rememberBottomAxis(label = getCustomAxisLabelComponent()),
             isZoomEnabled = true,
-            autoScaleUp = AutoScaleUp.Full,
-            legend = VerticalLegend(
+            autoScaleUp = AutoScaleUp.None,
+            legend = HorizontalLegend(
                 iconPaddingDp = 10.0f,
                 iconSizeDp = 10.0f,
                 items = listOf(LegendItem(icon = customPointShape, label = customDataLabel, labelText = "Currency"))
-            )
+            ),
+            /* fadingEdges = FadingEdges(
+                startEdgeWidthDp = 1200f,
+                endEdgeWidthDp = 0f,
+                visibilityThresholdDp = 1f
+            ),*/
+
+            /*
+            *     chart: Chart<Model>,
+    model: Model,
+    modifier: Modifier = Modifier,
+    startAxis: AxisRenderer<AxisPosition.Vertical.Start>? = null,
+    topAxis: AxisRenderer<AxisPosition.Horizontal.Top>? = null,
+    endAxis: AxisRenderer<AxisPosition.Vertical.End>? = null,
+    bottomAxis: AxisRenderer<AxisPosition.Horizontal.Bottom>? = null,
+    marker: Marker? = null,
+    markerVisibilityChangeListener: MarkerVisibilityChangeListener? = null,
+    legend: Legend? = null,
+    chartScrollSpec: ChartScrollSpec<Model> = rememberChartScrollSpec(),
+    isZoomEnabled: Boolean = true,
+    oldModel: Model? = null,
+    fadingEdges: FadingEdges? = null,
+    autoScaleUp: AutoScaleUp = AutoScaleUp.Full,
+    chartScrollState: ChartScrollState = rememberChartScrollState(),
+    horizontalLayout: HorizontalLayout = HorizontalLayout.segmented(),
+    getXStep: ((Model) -> Float)? = null,*/
         )
     }
 }
+
+@Composable
+fun getCustomAxisLabelComponent(): TextComponent = axisLabelComponent(
+    color = Color.DarkGray,
+    textSize = 11.sp,
+    background = getCustomPointShape(),
+    ellipsize = TextUtils.TruncateAt.MIDDLE,
+    lineCount = 1,
+    typeface = Typeface.DEFAULT,
+    textAlignment = Layout.Alignment.ALIGN_NORMAL
+)
+
+@Composable
+fun getCustomPointShape() = ShapeComponent(
+    shape = Shapes.pillShape,
+    color = Color(0xBFEEEEEE).toArgb()
+)
 
 @Preview(showBackground = true)
 @Composable

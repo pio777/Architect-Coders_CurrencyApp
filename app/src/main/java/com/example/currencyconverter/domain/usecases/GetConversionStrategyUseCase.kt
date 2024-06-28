@@ -8,7 +8,6 @@ import com.example.currencyconverter.domain.strategies.ConversionStrategy
 import com.example.currencyconverter.domain.strategies.ExchangeRateConversionStrategy
 import com.example.currencyconverter.domain.strategies.FrankfurterConversionStrategy
 
-
 class GetConversionStrategyUseCase(
     private val frankfurterRepository: FrankfurterRateRepository,
     private val exchangeRateRepository: ExchangeRateRepository
