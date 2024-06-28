@@ -32,8 +32,5 @@ This app is a currency converter, you can also see the value through the time of
 
 #### Screenshots
 
-
-
-Screenshots:
 <img width="321" alt="Screenshot 2024-06-27 at 11 52 29 p m" src="https://github.com/pio777/Architect-Coders_CurrencyApp/assets/10893311/a087ab9b-0446-47f2-ac7f-7f283f1850b8">
 <img width="321" alt="Screenshot 2024-06-27 at 11 52 54 p m" src="https://github.com/pio777/Architect-Coders_CurrencyApp/assets/10893311/2c998d29-dadb-4c49-a69d-2ed1d0a02d3a">
