@@ -45,17 +45,12 @@ datastore-preferences = { group = "androidx.datastore", name = "datastore-prefer
 datastore-preferences-core = { group = "androidx.datastore", name = "datastore-preferences-core", version.ref = "datastorePreferences" }
 # For Jetpack Compose.
 vico-compose = { group = "com.patrykandpatrick.vico", name = "compose", version.ref = "vico" }
-
-
 # For `compose`. Creates a `ChartStyle` based on an M2 Material Theme.
 vico-compose-m2 = { group = "com.patrykandpatrick.vico", name = "compose-m2", version.ref = "vico" }
-
 # For `compose`. Creates a `ChartStyle` based on an M3 Material Theme.
 vico-compose-m3 = { group = "com.patrykandpatrick.vico", name = "compose-m3", version.ref = "vico" }
-
 # Houses the core logic for charts and other elements. Included in all other modules.
 vico-core = { group = "com.patrykandpatrick.vico", name = "core", version.ref = "vico" }
-
 # For the view system.
 vico-views = { group = "com.patrykandpatrick.vico", name = "views", version.ref = "vico" }
 
