@@ -27,7 +27,9 @@ This app is a currency converter, you can also see the value through the time of
 - [ ] Add DI with Hilt
 
 
+#### APK Release:
 
+[currency_converter_app-debug.apk.zip](https://github.com/user-attachments/files/16025165/currency_converter_app-debug.apk.zip)
 
 
 #### Screenshots
