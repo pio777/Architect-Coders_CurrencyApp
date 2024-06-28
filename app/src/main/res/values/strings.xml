@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Currency Converter</string>
+    <string name="home_screen_route">Home</string>
+    <string name="history_screen_route">History</string>
+    <string name="select_currency">Select Currency</string>
+    <string name="enter_units">Enter Units</string>
+    <string name="convert">Convert</string>
+    <string name="search">Search</string>
+    <string name="cancel">Cancel</string>
+    <string name="date">Date: %1$s</string>
+    <string name="currency_value">Valor: %1$s</string>
+    <string name="save_as_favorite">Save as Favorite</string>
+    <string name="favorite_currency_selected">Favorite currency selected</string>
+    <string name="get_history">Get History</string>
+    <string name="no_internet_connection_error">No internet connection. Please check your network.</string>
+    <string name="request_timed_out_error">Request timed out. Please try again.</string>
+    <string name="unknown_error">An unknown error occurred.</string>
+    <string name="retry">Retry</string>
+    <string name="error_code">Error Code: %1$s</string>
+    <string name="message">Message: %1$s</string>
+    <string name="error_icon_description">Error Icon</string>
+    <string name="close">Close</string>
+</resources>
