@@ -55,8 +55,9 @@ import com.example.currencyconverter.domain.frankfurterCurrenciesList
 import com.example.currencyconverter.ui.common.ScreenContent
 import com.example.currencyconverter.ui.theme.CurrencyConverterTheme
 
-private const val NO_CURRENCY_SELECTED = -1
 private const val EMPTY_STRING = ""
+private const val POINT_CHARACTER = '.'
+private const val NO_CURRENCY_SELECTED = -1
 private const val FIRST_QTY_INPUT = 0
 private const val SECOND_QTY_INPUT = 1
 
@@ -217,7 +218,7 @@ fun CurrencyRow(
     onAmountChange: (String) -> Unit,
     amount: String
 ) {
-    var textFieldValue by remember { mutableStateOf(amount) } // Initialize with 'amount'
+    var textFieldValue by remember { mutableStateOf(amount) }
     LaunchedEffect(amount) { textFieldValue = amount }
 
     Row(modifier = modifier.padding(bottom = 18.dp)) {
@@ -250,7 +251,7 @@ fun CurrencyRow(
                 onValueChange = { newText ->
                     var pointEncountered = false
                     val filteredText = newText.filter {
-                        if (it == '.') {
+                        if (it == POINT_CHARACTER) {
                             if (pointEncountered) {
                                 false
                             } else {
@@ -331,7 +332,7 @@ fun CurrencySelectionDialog(
     modifier: Modifier = Modifier
 ) {
     if (showDialog) {
-        var searchText by remember { mutableStateOf("") }
+        var searchText by remember { mutableStateOf(EMPTY_STRING) }
         val filteredCurrencies = if (searchText.isBlank()) {
             currencies
         } else {

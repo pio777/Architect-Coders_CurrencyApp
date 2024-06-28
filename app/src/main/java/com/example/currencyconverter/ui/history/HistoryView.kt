@@ -118,7 +118,7 @@ fun HistoryScreen(
     val selectedCurrencyIndex = remember { mutableIntStateOf(0) }
     val fromCurrency = remember { mutableStateOf<Currency?>(null) }
     val toCurrency = remember { mutableStateOf<Currency?>(null) }
-    var showError by remember { mutableStateOf(true) }
+    var showError by remember { mutableStateOf(false) } // TODO WIP PIO
 
     val startDate = remember {
         mutableStateOf(
@@ -204,8 +204,8 @@ fun HistoryScreenContent(
         )
 
         // Date Pickers
-        SimpleDatePicker(context, startDate.value) { startDate.value = it }
-        SimpleDatePicker(context, endDate.value) { endDate.value = it }
+       /* SimpleDatePicker(context, startDate.value) { startDate.value = it } // TODO WIP PIO
+        SimpleDatePicker(context, endDate.value) { endDate.value = it }*/
 
         // Chart
         ExchangeRateChartScreen(
@@ -240,7 +240,6 @@ fun HistoryScreenContent(
     )
 }
 
-// Placeholder for Date Picker (Replace with your actual implementation)
 @Composable
 fun SimpleDatePicker(context: Context, date: String, onDateSelected: (String) -> Unit) {
     val calendar = remember { Calendar.getInstance() }
@@ -250,9 +249,7 @@ fun SimpleDatePicker(context: Context, date: String, onDateSelected: (String) ->
 
     val datePickerDialog = remember {
         DatePickerDialog(
-            // You'll need to provide a Context here.
-            // You can get it using LocalContext.current in your actual implementation.
-            context, // Replace with your Context
+            context,
             { _: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
                 onDateSelected("$year-${month + 1}-$dayOfMonth") // Format the date
             },
@@ -504,7 +501,7 @@ val customPointShape = ShapeComponent(
 )
 
 @Composable
-fun CurrencyLineChart(currencyData: List<Pair<Date, Float>>) {
+fun CurrencyLineChart(currencyData: List<Pair<Date, Float>>) { // TODO PIO use vico chart library
 
     // Create the ChartEntryModel directly
     val chartEntryModel = remember(currencyData) {
@@ -548,31 +545,6 @@ fun CurrencyLineChart(currencyData: List<Pair<Date, Float>>) {
                 iconSizeDp = 10.0f,
                 items = listOf(LegendItem(icon = customPointShape, label = customDataLabel, labelText = "Currency"))
             ),
-            /* fadingEdges = FadingEdges(
-                startEdgeWidthDp = 1200f,
-                endEdgeWidthDp = 0f,
-                visibilityThresholdDp = 1f
-            ),*/
-
-            /*
-            *     chart: Chart<Model>,
-    model: Model,
-    modifier: Modifier = Modifier,
-    startAxis: AxisRenderer<AxisPosition.Vertical.Start>? = null,
-    topAxis: AxisRenderer<AxisPosition.Horizontal.Top>? = null,
-    endAxis: AxisRenderer<AxisPosition.Vertical.End>? = null,
-    bottomAxis: AxisRenderer<AxisPosition.Horizontal.Bottom>? = null,
-    marker: Marker? = null,
-    markerVisibilityChangeListener: MarkerVisibilityChangeListener? = null,
-    legend: Legend? = null,
-    chartScrollSpec: ChartScrollSpec<Model> = rememberChartScrollSpec(),
-    isZoomEnabled: Boolean = true,
-    oldModel: Model? = null,
-    fadingEdges: FadingEdges? = null,
-    autoScaleUp: AutoScaleUp = AutoScaleUp.Full,
-    chartScrollState: ChartScrollState = rememberChartScrollState(),
-    horizontalLayout: HorizontalLayout = HorizontalLayout.segmented(),
-    getXStep: ((Model) -> Float)? = null,*/
         )
     }
 }
@@ -622,7 +594,6 @@ fun CurrencyLineChartPreview() {
     )
     CurrencyLineChart(currencyData = sampleData)
 }
-
 
 @Preview(showBackground = true)
 @Composable
