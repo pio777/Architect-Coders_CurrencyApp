@@ -7,6 +7,23 @@ plugins {
     alias(libs.plugins.compose.compiler)
 }
 
+// KTlint tasks
+tasks.register("ktlint", JavaExec::class) {
+    description = "Check Kotlin code style."
+    classpath = configurations.getByName("ktlint")
+    mainClass.set("com.pinterest.ktlint.Main")
+    args("src/**/*.kt")
+}
+tasks.named("check") {
+    dependsOn("ktlint")
+}
+
+tasks.register("ktlintFormat", JavaExec::class) {
+    description = "Fix Kotlin code style deviations."
+    classpath = configurations.getByName("ktlint")
+    mainClass.set("com.pinterest.ktlint.Main")
+    args("-F", "src/**/*.kt")
+}
 
 
 android {
@@ -60,7 +77,9 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+
 }
+
 
 dependencies {
 
@@ -86,6 +105,7 @@ dependencies {
     implementation(libs.vico.compose.m3)
     implementation(libs.vico.core)
     implementation(libs.vico.views)
+    implementation(libs.ktlint)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
