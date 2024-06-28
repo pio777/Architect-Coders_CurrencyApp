@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.kotlinx.serialization.json)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.kps.plugin)
 }
 
 // KTlint tasks
@@ -29,8 +30,6 @@ tasks.register("ktlintFormat", JavaExec::class) {
 android {
     namespace = "com.example.currencyconverter"
     compileSdk = 34
-
-
 
     defaultConfig {
         applicationId = "com.example.currencyconverter"
@@ -77,7 +76,6 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
-
 }
 
 
@@ -105,7 +103,15 @@ dependencies {
     implementation(libs.vico.compose.m3)
     implementation(libs.vico.core)
     implementation(libs.vico.views)
-    implementation(libs.ktlint)
+    //implementation(libs.ktlint)
+    debugImplementation(libs.chucker)
+    debugImplementation(libs.gander)
+
+    implementation(libs.stetho)
+    implementation(libs.stetho.okhttp3)
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
