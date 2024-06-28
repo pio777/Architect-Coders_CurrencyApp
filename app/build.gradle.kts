@@ -10,13 +10,13 @@ plugins {
 
 
 android {
-    namespace = "com.example.fantasystore"
+    namespace = "com.example.currencyconverter"
     compileSdk = 34
 
 
 
     defaultConfig {
-        applicationId = "com.example.fantasystore"
+        applicationId = "com.example.currencyconverter"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
